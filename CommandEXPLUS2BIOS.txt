@@ -1,7 +1,7 @@
 @name CommandEXPLUSBIOS
 @inputs OSInstalledV CPUE:entity CD:string ConsoleScreen:wirelink CPUOS:string CPUVideo:string CPUColur:vector CPUClourBackground:vector EXTGPU:wirelink CPU:wirelink HDD:string BCLineupdate BCSTARTDONE BCKickIN BCSoundplay:string BCSoundupdate BCVideoIN:string Reset BCUpdateIN BCClourIN:vector BCBGClourIN:vector Inuse BCOS:string BCOSMAKER:string KeyboradIN:string User:entity
 @outputs State:string HDDACTIVATE HDDWrite:array BCLoados BCUserOUT:entity BCKeyboradOUT:string BCInuseOUT CPUKeyboradOUT:string CPUInuseOUT CPUuserOUT:entity
-@persist BCChime State:string
+@persist State:string
 @trigger
 #Boot#
 if (first()) {
