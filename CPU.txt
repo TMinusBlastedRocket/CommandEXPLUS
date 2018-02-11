@@ -1,0 +1,7 @@
+@name CPU
+@inputs Keyborad:string User:entity Inuse
+@outputs OSINSTALLEDV CPUE:entity Bios:wirelink CPUVideo:string CPUClour:vector CPUBackgroundClour:vector
+@persist 
+@trigger 
+CPUE=entity()
+OSINSTALLEDV=0
