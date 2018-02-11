@@ -1,0 +1,59 @@
+@name CommandEXPLUSBIOS
+@inputs OSInstalledV CPUE:entity CD:string ConsoleScreen:wirelink CPUVideo:string CPUColur:vector CPUClourBackground:vector EXTGPU:wirelink CPU:wirelink HDD:string BCLineupdate BCSTARTDONE BCKickIN BCSoundplay:string BCSoundupdate BCVideoIN:string Reset BCUpdateIN BCClourIN:vector BCBGClourIN:vector Inuse BCOS:string BCOSMAKER:string KeyboradIN:string User:entity
+@outputs HDDACTIVATE HDDWrite:array BCLoados BCUserOUT:entity BCKeyboradOUT:string BCInuseOUT CPUKeyboradOUT:string CPUInuseOUT CPUuserOUT:entity
+@persist Boot Post ClassicMode NStart NInstall POSTERROR OSInstalled BCChime
+@trigger 
+runOnTick(1)
+#Post#
+if (BCOS==""&CD==""&OSInstalledV==0) {
+ConsoleScreen:writeString("CommandEXPLUS Frimware V1.0",0,1,255,0)
+ConsoleScreen:writeString("No OS Installed",0,2,255,0)
+POSTERROR=1
+}
+#Boot CommandEXPLUS#
+if (BCOS==""&CD!=""&NInstall==0&POSTERROR!=1) {
+ConsoleScreen:writeString("CommandEXPLUS Frimware V1.0",0,1,255,0)
+ConsoleScreen:writeString("Installing OS",0,2,255,0)
+OS=CD
+OS=OS
+CPUE:remoteUpload(OS)
+ConsoleScreen:writeString("OS Installed Please Remove Disk",0,3,255,0)
+OSInstalled=1
+NInstall=1
+}
+if (BCOS==""&CD==""&OSInstalledV==1&NStart==0&POSTERROR!=1&NInstall!=1) {
+soundPlay("LOL",10,"quackk.wav")
+NStart=1
+}
+if (NStart == 1) {
+ConsoleScreen:writeString("CommandEXPLUS Frimware V1.0",0,1,255,0)
+ConsoleScreen:writeString("Starting OS",0,2,255,0)
+ConsoleScreen:writeString(CPUVideo,0,3,CPUColur,CPUClourBackground)
+CPUKeyboradOUT=KeyboradIN
+CPUInuseOUT=Inuse
+CPUuserOUT=User
+}
+#CommandEXClassic Emulator#
+if (BCOS!=""&POSTERROR!=1) {
+ConsoleScreen:writeString("CommandEXPLUS Frimware V1.0",0,1,255,0)
+ConsoleScreen:writeString("Starting OS",0,2,255,0)
+Line=4
+BCLoados=1
+ConsoleScreen:writeString(BCVideoIN,0,3,BCClourIN,BCBGClourIN)
+Update=1
+Update=0
+BCInuseOUT=Inuse
+BCKeyboradOUT=KeyboradIN
+BCUserOUT=User
+ClassicMode=1
+}
+if (BCSTARTDONE==1&ClassicMode==1){
+BCLoados=0
+}
+if (BCSTARTDONE==1&BCChime==0) {
+soundPlay("lol",5000,"ui/chime_rd_2base_neg.wav")
+BCChime=1
+}
+if (Reset==1) {
+reset()
+}
